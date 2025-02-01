@@ -42,9 +42,9 @@ st.sidebar.info("Select a task below to explore NLP functionalities.")
 st.sidebar.markdown("---")
 
 task = st.sidebar.radio("Select Task", [
-    "Home", "Sentiment Analysis", "Named Entity Recognition", 
+    "Home", "Sentiment Analysis", 
     "Language Translation", "Text Similarity", "Keyword Extraction", "Word Cloud Generator","Speech-to-Text",
-    "Text-to-Speech","Grammar & Spell Check"
+    "Text-to-Speech",
 ])
 
 st.sidebar.markdown("---")
@@ -95,26 +95,6 @@ elif task == "Sentiment Analysis":
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
 
-# Named Entity Recognition (NER)
-elif task == "Named Entity Recognition":
-    st.subheader("🔹 Named Entity Recognition (NER)")
-    st.markdown("""NER identifies and categorizes proper names, places, dates, and more from the given text using the SpaCy library.""")
-    text = st.text_area("Enter text for NER:", "Elon Musk is the CEO of Tesla.")
-    if st.button("Extract Entities"):
-        
-
-        from spacy.cli import download
-
-# Try to load the SpaCy model, and if it fails, download it
-        try:
-            nlp = spacy.load("en_core_web_sm")
-        except OSError:
-            download("en_core_web_sm")
-            nlp = spacy.load("en_core_web_sm")
-    
-        doc = nlp(text)
-        for ent in doc.ents:
-            st.write(f"{ent.text} ({ent.label_})")
 
 # Language Translation
 elif task == "Language Translation":
@@ -247,18 +227,7 @@ elif task == "Speech-to-Text":
             text = recognizer.recognize_google(audio_data)
             st.success(f"**Transcribed Text:** {text}")
 
-# Grammar & Spell Check
-elif task == "Grammar & Spell Check":
-    st.subheader("🔹 Grammar & Spell Check")
-    st.markdown("""
-    This feature checks for spelling and grammatical errors using **LanguageTool**.
-    """)
-    
-    tool = language_tool_python.LanguageTool("en-US")
-    input_text = st.text_area("Enter text for correction:", "This is an example sentence with erors.")
-    if st.button("Check Grammar & Spelling"):
-        corrected_text = tool.correct(input_text)
-        st.success(f"Corrected Text: {corrected_text}")
+
 # Keyword Extraction
 elif task == "Keyword Extraction":
     st.subheader("🔹 Keyword Extraction")
