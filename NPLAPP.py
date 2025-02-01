@@ -16,9 +16,8 @@ import os
 import speech_recognition as sr
 from gtts import gTTS
 import joblib
+import language_tool_python
 import pyttsx3
-import re  
-from gingerit import GingerIt
 
 
 # Set background image
@@ -240,25 +239,16 @@ elif task == "Speech-to-Text":
 
 # Grammar & Spell Check
 elif task == "Grammar & Spell Check":
-    st.subheader("🔹 Grammar & Spell Check ✍️")
-    st.markdown("This feature corrects spelling and grammar errors using **GingerIt** and `re` for text cleaning.")
-
-    input_text = st.text_area("Enter text for correction:", "This is an exampel of text with errrs.")
-
-    def clean_text(text):
-        """Removes special characters and extra spaces using regex."""
-        text = re.sub(r'\s+', ' ', text)  # Remove extra spaces
-        text = re.sub(r'[^A-Za-z0-9.,!?\'" ]', '', text)  # Keep only valid characters
-        return text.strip()
-
+    st.subheader("🔹 Grammar & Spell Check")
+    st.markdown("""
+    This feature checks for spelling and grammatical errors using **LanguageTool**.
+    """)
+    
+    tool = language_tool_python.LanguageTool("en-US")
+    input_text = st.text_area("Enter text for correction:", "This is an example sentence with erors.")
     if st.button("Check Grammar & Spelling"):
-        if input_text.strip():
-            cleaned_text = clean_text(input_text)
-            parser = GingerIt()
-            corrected_text = parser.parse(cleaned_text)["result"]
-            st.success(f"✅ Corrected Text: {corrected_text}")
-        else:
-            st.warning("⚠️ Please enter some text.")
+        corrected_text = tool.correct(input_text)
+        st.success(f"Corrected Text: {corrected_text}")
 # Keyword Extraction
 elif task == "Keyword Extraction":
     st.subheader("🔹 Keyword Extraction")
