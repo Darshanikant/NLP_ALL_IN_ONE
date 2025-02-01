@@ -101,7 +101,17 @@ elif task == "Named Entity Recognition":
     st.markdown("""NER identifies and categorizes proper names, places, dates, and more from the given text using the SpaCy library.""")
     text = st.text_area("Enter text for NER:", "Elon Musk is the CEO of Tesla.")
     if st.button("Extract Entities"):
-        nlp = spacy.load("en_core_web_sm")
+        
+
+        from spacy.cli import download
+
+# Try to load the SpaCy model, and if it fails, download it
+        try:
+            nlp = spacy.load("en_core_web_sm")
+        except OSError:
+            download("en_core_web_sm")
+            nlp = spacy.load("en_core_web_sm")
+    
         doc = nlp(text)
         for ent in doc.ents:
             st.write(f"{ent.text} ({ent.label_})")
