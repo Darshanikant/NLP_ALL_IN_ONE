@@ -2,6 +2,9 @@ streamlit
 numpy
 spacy
 transformers
+torch
+torchvision
+torchaudio
 nltk
 scikit-learn
 googletrans==4.0.0-rc1
