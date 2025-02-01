@@ -1,0 +1,15 @@
+streamlit
+numpy
+spacy
+transformers
+nltk
+scikit-learn
+googletrans==4.0.0-rc1
+pandas
+wordcloud
+matplotlib
+speechrecognition
+gtts
+joblib
+language-tool-python
+pyttsx3
