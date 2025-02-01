@@ -169,7 +169,7 @@ elif task == "Word Cloud Generator":
 
 
 
-# Text-to-Speech with Male & Female Voice
+# Text-to-Speech (TTS) with gTTS
 elif task == "Text-to-Speech":
     st.subheader("🔹 Text-to-Speech 🔊")
     st.markdown("Convert text into speech and download the audio file.")
@@ -178,34 +178,23 @@ elif task == "Text-to-Speech":
 
     # Dropdown for voice selection
     voice_option = st.selectbox("Choose Voice:", ["Male", "Female"])
-    
 
-    # Function to convert text to speech
-    def text_to_speech(text, gender="Male"):
-        engine = pyttsx3.init()
-        voices = engine.getProperty('voices')
-
-        # Set male or female voice based on user selection
-        if gender == "Male":
-            engine.setProperty('voice', voices[0].id)  # Typically Male
-        else:
-            engine.setProperty('voice', voices[1].id)  # Typically Female
-
-        engine.save_to_file(text, "output.mp3")
-        engine.runAndWait()
+    # Function to convert text to speech using gTTS
+    def text_to_speech(text):
+        # Use gTTS to convert text to speech
+        tts = gTTS(text=text, lang='en', slow=False)
+        tts.save("output.mp3")
+        st.audio("output.mp3")
 
     # Convert text to speech on button click
     if st.button("Convert to Speech"):
         if text.strip():
-            text_to_speech(text, voice_option)
-            st.audio("output.mp3")
-            
+            text_to_speech(text)
             # Provide download button for the audio
             with open("output.mp3", "rb") as audio_file:
                 st.download_button(label="Download Audio", data=audio_file, file_name="speech.mp3", mime="audio/mp3")
         else:
             st.error("Please enter text to convert.")
-
 # Speech-to-Text (STT)
 elif task == "Speech-to-Text":
     st.subheader("🔹 Speech-to-Text (STT)")
