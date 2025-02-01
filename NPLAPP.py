@@ -18,7 +18,7 @@ from gtts import gTTS
 import joblib
 import pyttsx3
 import re  
-from gingerit import GingerIt
+from gingerit.gingerit import GingerIt
 
 
 # Set background image
