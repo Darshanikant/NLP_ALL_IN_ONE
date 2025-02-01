@@ -11,7 +11,7 @@ googletrans==4.0.0-rc1
 pandas
 wordcloud
 matplotlib
-GingerIt
+gingerit
 speechrecognition
 gtts
 joblib
