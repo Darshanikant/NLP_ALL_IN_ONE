@@ -65,14 +65,13 @@ if task == "Home":
     This application provides various NLP functionalities including:
     
     - **Sentiment Analysis** 😊😞 - Analyze the emotion behind the text.
-    - **Named Entity Recognition (NER)** 🏢📅 - Identify entities like names, places, and organizations.
     - **Language Translation** 🌍 - Translate text into different languages.
     - **Text Similarity** 🔍 - Measure the similarity between two texts.
     - **Keyword Extraction** 🏷️ - Extract important words from the text.
     - **Word Cloud Generator** ☁️ - Generate a visual representation of word frequencies.
     - **Speech-to-Text** 🗣️ - Convert speech to text.
     - **Text-to-Speech** 🗣️ - Convert text to speech.
-    - **Grammar & Spell Check** 📝 - Check grammar and spell errors.
+    
     
     Choose a task from the sidebar and get started!
     """)
